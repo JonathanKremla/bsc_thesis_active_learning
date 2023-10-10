@@ -97,7 +97,7 @@ def norm_spectrum_kernel(theta, w1, w2):
 
 # Metropolis hastings algorithm with a burn in of 50000 (Line:4-7)
 def hasting(current_candidate, target_property, theta, goal_word):
-    for _ in range(50000):
+    for _ in range(10000):
         next_candidate = get_next_sample()
         alpha = phi(target_property, next_candidate, theta, goal_word) / phi(target_property, current_candidate, theta,
                                                                              goal_word)
@@ -130,8 +130,6 @@ def minimize(t, weights, properties, candidates, lmda, goal_word):
 
 # Execution of the learning algorithm
 def learning_algo(theta, budget, target_property, goal_word, oracle_threshold):
-    print(goal_word)
-    print(oracle_threshold)
     properties = []
     weights = []
     thetas = []
@@ -167,7 +165,7 @@ if __name__ == '__main__':
     # Fill with desired goal words
     words = ['AAAAA', 'A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
     # decide number of runs per parameter set
-    runs = 2
+    runs = 100
     # decide max number of parallel processes
     max_processes = 6
 
