@@ -187,8 +187,7 @@ if __name__ == '__main__':
                     args = [(theta, budget, 1, word, threshold) for _ in range(runs)]
                     for result in p.starmap(learning_algo, args):
                         results.append(result)
-                count = [0, 0, 0, 0, 0]
-                goal_word_count = 0
+
                 data = []
                 rdata = []
                 len_sum = 0
@@ -198,24 +197,8 @@ if __name__ == '__main__':
                     d = normalized_lev.distance(w, word)
                     avg_dist += d 
                     data.append(d)
-                    if w == word:
-                        goal_word_count += 1
-                    for c in w:
-                        if c == 'A':
-                            count[0] += 1
-                        if c == 'B':
-                            count[1] += 1
-                        if c == 'C':
-                            count[2] += 1
-                        if c == 'D':
-                            count[3] += 1
-                        if c == 'E':
-                            count[4] += 1
                 avg_dist = avg_dist / runs
-                print("Reached goal word {} times".format(goal_word_count))
                 print("Average distance to goal word: {}".format(avg_dist))
-                print(
-                    "A: {}, B: {}, C: {} , D: {}, E: {}".format(count[0], count[1], count[2], count[3], count[4]))
                 print("Average length: {}".format(len_sum / runs))
                 print("{}".format(res))
                 avg_r_dist = 0
