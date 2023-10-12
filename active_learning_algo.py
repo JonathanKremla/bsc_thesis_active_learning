@@ -4,6 +4,7 @@ from math import exp, log
 from random import randint, uniform
 import numpy as np
 import scipy as sc
+from scipy.stats import ttest_ind
 from strsimpy.levenshtein import Levenshtein
 from strsimpy.normalized_levenshtein import NormalizedLevenshtein
 import multiprocessing as mp
@@ -97,7 +98,7 @@ def norm_spectrum_kernel(theta, w1, w2):
 
 # Metropolis hastings algorithm with a burn in of 50000 (Line:4-7)
 def hasting(current_candidate, target_property, theta, goal_word):
-    for _ in range(50000):
+    for _ in range(10000):
         next_candidate = get_next_sample()
         alpha = phi(target_property, next_candidate, theta, goal_word) / phi(target_property, current_candidate, theta,
                                                                              goal_word)
@@ -130,8 +131,6 @@ def minimize(t, weights, properties, candidates, lmda, goal_word):
 
 # Execution of the learning algorithm
 def learning_algo(theta, budget, target_property, goal_word, oracle_threshold):
-    print(goal_word)
-    print(oracle_threshold)
     properties = []
     weights = []
     thetas = []
@@ -161,13 +160,13 @@ if __name__ == '__main__':
     theta = 1
     # Set parameters:
     # Fill with desired budget(s) for the learning algorithm
-    budgets = [10, 15, 20]
+    budgets = [100]
     # Fill with desired threshold(s) of the Oracle evaluation
-    thresholds = [0.75, 0.8, 0.85, 0.9]
+    thresholds = [0.8]
     # Fill with desired goal words
     words = ['AAAAA', 'A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
     # decide number of runs per parameter set
-    runs = 2
+    runs = 100
     # decide max number of parallel processes
     max_processes = 6
 
@@ -175,12 +174,12 @@ if __name__ == '__main__':
         for threshold in thresholds:
             for el in budgets:
                 budget = el
-                print("---------------------------------------\n")
-                print("Running for algorithm with params:\n")
-                print("goal word = {}\n".format(word))
-                print("Oracle Threshold  = {}\n".format(threshold))
-                print("budget = {}\n".format(budget))
-                print("runs = {}\n".format(runs))
+                print("---------------------------------------")
+                print("Running for algorithm with params:")
+                print("goal word = {}".format(word))
+                print("Oracle Threshold  = {}".format(threshold))
+                print("budget = {}".format(budget))
+                print("runs = {}".format(runs))
                 res = []
                 results = list()
 
@@ -190,11 +189,15 @@ if __name__ == '__main__':
                         results.append(result)
                 count = [0, 0, 0, 0, 0]
                 goal_word_count = 0
+                data = []
+                rdata = []
                 len_sum = 0
                 avg_dist = 0
                 for w in results:
                     len_sum += len(w)
-                    avg_dist += normalized_lev.distance(w, word)
+                    d = normalized_lev.distance(w, word)
+                    avg_dist += d 
+                    data.append(d)
                     if w == word:
                         goal_word_count += 1
                     for c in w:
@@ -209,14 +212,17 @@ if __name__ == '__main__':
                         if c == 'E':
                             count[4] += 1
                 avg_dist = avg_dist / runs
-                print("Reached goal word {} times\n".format(goal_word_count))
-                print("Average distance to goal word: {}\n".format(avg_dist))
+                print("Reached goal word {} times".format(goal_word_count))
+                print("Average distance to goal word: {}".format(avg_dist))
                 print(
-                    "A: {}, B: {}, C: {} , D: {}, E: {}\n".format(count[0], count[1], count[2], count[3], count[4]))
-                print("Average length: {}\n".format(len_sum / runs))
-                print("{}\n".format(res))
+                    "A: {}, B: {}, C: {} , D: {}, E: {}".format(count[0], count[1], count[2], count[3], count[4]))
+                print("Average length: {}".format(len_sum / runs))
+                print("{}".format(res))
                 avg_r_dist = 0
                 for _ in range(runs):
                     nw = proposal_generator()
-                    avg_r_dist += normalized_lev.distance(nw, word)
-                print("Average distance for randomly generated words: {}\n".format(avg_r_dist / runs))
+                    rd = normalized_lev.distance(nw, word)
+                    avg_r_dist += rd
+                    rdata.append(rd)
+                print("Average distance for randomly generated words: {}".format(avg_r_dist / runs))
+                print(ttest_ind(data, rdata))
