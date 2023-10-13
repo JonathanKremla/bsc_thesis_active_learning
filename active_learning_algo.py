@@ -122,6 +122,7 @@ def minimize(t, weights, properties, candidates, lmda, goal_word):
             s += weights[i - 1] * log(r) + lmda * abs(n) ** 2
         return s
 
+    #set lower bound of 1 for k
     bounds = sc.optimize.Bounds(1, np.inf)
     opt = sc.optimize.minimize(f, np.array([1]), bounds=bounds)
     return opt.x
@@ -164,7 +165,7 @@ if __name__ == '__main__':
     # Fill with desired threshold(s) of the Oracle evaluation
     thresholds = [0.8]
     # Fill with desired goal words
-    words = ['A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
+    words = ['AAAAA','A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
     # decide number of runs per parameter set
     runs = 1000
     # decide max number of parallel processes
