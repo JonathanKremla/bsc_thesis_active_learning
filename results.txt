@@ -1,0 +1,77 @@
+---------------------------------------
+Running for algorithm with params:
+goal word = AAAAA
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.7918706349206343
+Average length: 6.177
+[]
+Average distance for randomly generated words: 0.8286269841269823
+Ttest_indResult(statistic=-5.339928904597879, pvalue=1.0356361537727711e-07)
+---------------------------------------
+Running for algorithm with params:
+goal word = A
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.8420293650793654
+Average length: 5.862
+[]
+Average distance for randomly generated words: 0.8710226190476196
+Ttest_indResult(statistic=-5.066585719040703, pvalue=4.422892635912612e-07)
+---------------------------------------
+Running for algorithm with params:
+goal word = AAAAAAAAAA
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.8418999999999934
+Average length: 6.483
+[]
+Average distance for randomly generated words: 0.876099999999995
+Ttest_indResult(statistic=-6.277304750020669, pvalue=4.2136532601348963e-10)
+---------------------------------------
+Running for algorithm with params:
+goal word = ABCDE
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.7000095238095252
+Average length: 6.004
+[]
+Average distance for randomly generated words: 0.6956753968253966
+Ttest_indResult(statistic=0.7525375221535142, pvalue=0.4518165230477612)
+---------------------------------------
+Running for algorithm with params:
+goal word = B
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.8500718253968241
+Average length: 5.888
+[]
+Average distance for randomly generated words: 0.8766829365079362
+Ttest_indResult(statistic=-4.849062196732472, pvalue=1.3362733359766508e-06)
+---------------------------------------
+Running for algorithm with params:
+goal word = BBBBB
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.7840948412698407
+Average length: 6.208
+[]
+Average distance for randomly generated words: 0.8216492063492051
+Ttest_indResult(statistic=-5.33047228773828, pvalue=1.0902432614720358e-07)
+---------------------------------------
+Running for algorithm with params:
+goal word = BBBBBBBBBB
+Oracle Threshold  = 0.8
+budget = 100
+runs = 1000
+Average distance to goal word: 0.8526999999999945
+Average length: 6.213
+[]
+Average distance for randomly generated words: 0.875599999999993
+Ttest_indResult(statistic=-4.443134398883034, pvalue=9.350889127004702e-06)

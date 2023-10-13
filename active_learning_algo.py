@@ -164,9 +164,9 @@ if __name__ == '__main__':
     # Fill with desired threshold(s) of the Oracle evaluation
     thresholds = [0.8]
     # Fill with desired goal words
-    words = ['AAAAA', 'A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
+    words = ['A', 'AAAAAAAAAA', 'ABCDE', 'B', 'BBBBB', 'BBBBBBBBBB']
     # decide number of runs per parameter set
-    runs = 100
+    runs = 1000
     # decide max number of parallel processes
     max_processes = 6
 
